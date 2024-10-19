@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Email</th>
+                <th scope="col">Created At</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in userList %}
+                <tr>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i') : 'N/A' }} GMT</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Please <a href="{{ path('user_register') }}">register</a> or <a href="{{ path('user_login') }}">login</a> to
+            see list of users :)</p>
+    {% endif %}
+{% endblock %}
